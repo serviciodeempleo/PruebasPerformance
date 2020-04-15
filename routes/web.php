@@ -19,4 +19,4 @@ Route::get('buscador/filtro/', 'Buscador\BuscadorController@getBuscador')->name(
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('');
