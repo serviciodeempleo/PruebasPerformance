@@ -30,7 +30,7 @@ class BuscadorController extends Controller
         }
 
         $buscador = $buscador
-        ->with('tipoDocumento','prestadorUsuario','resultadosBuscador','resultadosBuscador.perfil')
+        ->with('tipoDocumento','prestadorUsuario','resultadosBuscador','resultadosBuscador.perfil','resultadosBuscador.estilo')
         ->first()
         ;
         

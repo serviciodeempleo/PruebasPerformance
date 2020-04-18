@@ -15,25 +15,38 @@
         </v-col>
       </v-row>
       <div v-if="mostrarResultados">
+        
         <v-container fluid ma-0 pa-0 fill-height>
           <v-layout row>
             <v-flex xs4>
-              <v-img width="200px" src="/img/logo-spe.png"></v-img>
+              <v-img class="float-left" width="200px" src="/img/logo-spe.png"></v-img>
             </v-flex>
             <v-flex xs4></v-flex>
             <v-flex xs4>
-              <v-img width="340px" src="/img/logo-mintrabajo.png"></v-img>
+              <v-img class="float-right" width="340px" src="/img/logo-mintrabajo.png"></v-img>
             </v-flex>
           </v-layout>
         </v-container>
 
+        <v-divider vertical></v-divider>
+
+        <v-card color="#E7E7E7">
+          <v-card-text>
+            <div class="headline" style="color:#000">
+              {{introSPE}}
+            </div>
+          </v-card-text>
+        </v-card>
+
+        <v-divider vertical></v-divider>
+
         <v-card color="#1F64D2" dark>
-          <v-card-title class="headline">{{persona.nombre}} {{persona.apellido}}</v-card-title>
+          <v-card-title class="headline text-uppercase">{{persona.nombre}} {{persona.apellido}}</v-card-title>
 
           <v-card-subtitle>{{persona.tipo_documento.tipo_documento}} {{persona.documento}}</v-card-subtitle>
 
           <v-card-text>
-            <div style="display:flex; justify-content:space-between;">
+            <div style="display:flex; justify-content:space-between; color:#FFF;">
               <div>
                 <span class="font-weight-bold">Prestador:</span>
                 {{persona.prestador_usuario.nombre}} {{persona.prestador_usuario.apellido}}
@@ -48,9 +61,43 @@
 
         <v-divider vertical></v-divider>
 
+        <v-card color="#E7E7E7">
+          <v-card-text>
+            <div class="headline" style="color:#000">
+              {{intro4B}}
+            </div>
+          </v-card-text>
+        </v-card>
+
+        <v-divider vertical></v-divider>
+
+        <h4
+          v-if="persona.resultados_buscador"
+        >{{titulo01}}</h4>
+
+        <div style="display:flex; justify-content:space-between;">
+          {{titulo01des01}}
+        </div>
+
+        <v-divider vertical></v-divider>
+
+        <h4
+          v-if="persona.resultados_buscador"
+        >{{titulo02}}</h4>
+
+        <div style="display:flex; justify-content:space-between;">
+          {{titulo02des}}
+        </div>
+
+        <v-divider vertical></v-divider>
+
         <h3
           v-if="persona.resultados_buscador"
-        >Estilos de pensamiento - Neuro fortaleza y Neuro debilidad</h3>
+        >{{titulo01}}</h3>
+
+        <div style="display:flex; justify-content:space-between;">
+          <span style="white-space: pre-wrap;">{{titulo01des02}}</span>
+        </div>
 
         <!-- Aquí imagen cerebro -->
         <v-container fill-height fluid>
@@ -63,89 +110,158 @@
 
         <v-divider vertical></v-divider>
 
-        <h3 v-if="persona.resultados_buscador">Perfil de competencia</h3>
-
-        <!-- Aquí imagen circulo y texto competencia -->
+        <!-- Aquí gráfico de barras -->
         <v-container fill-height fluid>
-          <v-row>
-            <v-col align="center" justify="center">
-              <v-img width="200px" :src="'/img/perfil_' + numImgPerfil + '.png'"></v-img>
+          <v-row align="center" justify="center">
+            <v-col cols="2"></v-col>
+            <v-col cols="8">
+              <horizontal-bar-chart :chart-data="datacollection" :options="options" :height="300"></horizontal-bar-chart>
             </v-col>
-            <v-col align="left" justify="left">
-              <h4>{{ persona.resultados_buscador[0].perfil.perfil }}</h4>
-              <p>Este perfil de competencia se caracteriza por: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </v-col>
+            <v-col cols="2"></v-col>
           </v-row>
         </v-container>
 
         <v-divider vertical></v-divider>
 
-        <h3 v-if="persona.resultados_buscador">Competencias desarrolladas</h3>
-
-        <!-- Aquí gráfico de barras -->
-        <horizontal-bar-chart :chart-data="datacollection" :options="options"></horizontal-bar-chart>
+        <!-- Aquí tabla competencias -->
+        <v-container fill-height fluid>
+          <v-row align="center" justify="center">
+            <v-col cols="2"></v-col>
+            <v-col cols="8">
+              <v-simple-table v-if="persona.resultados_buscador">
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left" style="color:#000;font-size:16px;">Competencias</th>
+                      <th class="text-left" style="color:#000;font-size:16px;">Analítico EI</th>
+                      <th class="text-left" style="color:#000;font-size:16px;">Eficiente AI</th>
+                      <th class="text-left" style="color:#000;font-size:16px;">Empático AD</th>
+                      <th class="text-left" style="color:#000;font-size:16px;">Creativo ED</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr bgcolor="#B8DAFF">
+                      <td>Joven</td>
+                      <td>{{ persona.resultados_buscador[0].joven_ei }}</td>
+                      <td>{{ persona.resultados_buscador[0].joven_ai }}</td>
+                      <td>{{ persona.resultados_buscador[0].joven_ad }}</td>
+                      <td>{{ persona.resultados_buscador[0].joven_ed }}</td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr bgcolor="#B8DAFF">
+                      <td>Adulto</td>
+                      <td>{{ persona.resultados_buscador[0].ei }}</td>
+                      <td>{{ persona.resultados_buscador[0].ai }}</td>
+                      <td>{{ persona.resultados_buscador[0].ad }}</td>
+                      <td>{{ persona.resultados_buscador[0].ed }}</td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr bgcolor="#007BFF">
+                      <td>Tiempo Libre</td>
+                      <td>{{ persona.resultados_buscador[0].libre_ei }}</td>
+                      <td>{{ persona.resultados_buscador[0].libre_ai }}</td>
+                      <td>{{ persona.resultados_buscador[0].libre_ad }}</td>
+                      <td>{{ persona.resultados_buscador[0].libre_ed }}</td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr bgcolor="#007BFF">
+                      <td>Laboral</td>
+                      <td>{{ persona.resultados_buscador[0].laboral_ei }}</td>
+                      <td>{{ persona.resultados_buscador[0].laboral_ai }}</td>
+                      <td>{{ persona.resultados_buscador[0].laboral_ad }}</td>
+                      <td>{{ persona.resultados_buscador[0].laboral_ed }}</td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr bgcolor="#007BFF">
+                      <td>Autopercepción</td>
+                      <td>{{ persona.resultados_buscador[0].auto_ei }}</td>
+                      <td>{{ persona.resultados_buscador[0].auto_ai }}</td>
+                      <td>{{ persona.resultados_buscador[0].auto_ad }}</td>
+                      <td>{{ persona.resultados_buscador[0].auto_ed }}</td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
+            </v-col>
+            <v-col cols="2"></v-col>
+          </v-row>
+        </v-container>
 
         <v-divider vertical></v-divider>
 
-        <!-- Aquí tabla competencias -->
-        <v-simple-table v-if="persona.resultados_buscador">
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">Competencias</th>
-                <th class="text-left">Analítico EI</th>
-                <th class="text-left">Eficiente AI</th>
-                <th class="text-left">Empático AD</th>
-                <th class="text-left">Creativo ED</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Joven</td>
-                <td>{{ persona.resultados_buscador[0].joven_ei }}</td>
-                <td>{{ persona.resultados_buscador[0].joven_ai }}</td>
-                <td>{{ persona.resultados_buscador[0].joven_ad }}</td>
-                <td>{{ persona.resultados_buscador[0].joven_ed }}</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>Adulto</td>
-                <td>{{ persona.resultados_buscador[0].ei }}</td>
-                <td>{{ persona.resultados_buscador[0].ai }}</td>
-                <td>{{ persona.resultados_buscador[0].ad }}</td>
-                <td>{{ persona.resultados_buscador[0].ed }}</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>Tiempo Libre</td>
-                <td>{{ persona.resultados_buscador[0].libre_ei }}</td>
-                <td>{{ persona.resultados_buscador[0].libre_ai }}</td>
-                <td>{{ persona.resultados_buscador[0].libre_ad }}</td>
-                <td>{{ persona.resultados_buscador[0].libre_ed }}</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>Laboral</td>
-                <td>{{ persona.resultados_buscador[0].laboral_ei }}</td>
-                <td>{{ persona.resultados_buscador[0].laboral_ai }}</td>
-                <td>{{ persona.resultados_buscador[0].laboral_ad }}</td>
-                <td>{{ persona.resultados_buscador[0].laboral_ed }}</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td>Autopercepción</td>
-                <td>{{ persona.resultados_buscador[0].auto_ei }}</td>
-                <td>{{ persona.resultados_buscador[0].auto_ai }}</td>
-                <td>{{ persona.resultados_buscador[0].auto_ad }}</td>
-                <td>{{ persona.resultados_buscador[0].auto_ed }}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
+        <h3
+          v-if="persona.resultados_buscador"
+        >{{titulo02}}</h3>
+
+        <v-divider vertical></v-divider>
+
+        <!-- Aquí imagen neurofortaleza y texto neurofortaleza -->
+        <v-card color="rgb(255, 255, 255, 0.2)">
+          <v-card-text>
+            <div class="headline" style="color:#000">
+              <v-container fill-height fluid>
+                <v-row>
+                  <v-col cols="3" align="center" justify="center">
+                    <v-img width="200px" :src="'/img/estilo_' + numImgNeurofortaleza + '.png'"></v-img>
+                  </v-col>
+                  <v-col cols="9" align="left" justify="left">
+                    <h4>NEUROFORTALEZA: {{ persona.resultados_buscador[0].estilo.estilo }}</h4>
+                    <p>{{ persona.resultados_buscador[0].estilo.estilo_desc }}</p>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </div>
+          </v-card-text>
+        </v-card>
+
+        <v-divider vertical></v-divider>
+
+        <!-- Aquí imagen neurodebilidad y texto neurodebilidad -->
+        <v-card color="rgb(255, 255, 255, 0.2)">
+          <v-card-text>
+            <div class="headline" style="color:#000">
+              <v-container fill-height fluid>
+                <v-row>
+                  <v-col cols="3" align="center" justify="center">
+                    <v-img width="200px" :src="'/img/opuesto_' + numImgNeurodebilidad + '.png'"></v-img>
+                  </v-col>
+                  <v-col cols="9" align="left" justify="left">
+                    <h4>NEURODEBILIDAD: {{ persona.resultados_buscador[0].estilo.opuesto }}</h4>
+                    <p>{{ persona.resultados_buscador[0].estilo.opuesto_desc }}</p>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </div>
+          </v-card-text>
+        </v-card>
+
+        <v-divider vertical></v-divider>
+
+        <!-- Aquí imagen competencia y texto competencia -->
+        <v-card color="rgb(255, 255, 255, 0.2)">
+          <v-card-text>
+            <div class="headline" style="color:#000">
+              <v-container fill-height fluid>
+                <v-row>
+                  <v-col cols="3" align="center" justify="center">
+                    <v-img width="200px" :src="'/img/perfil_' + numImgPerfil + '.png'"></v-img>
+                  </v-col>
+                  <v-col cols="9" align="left" justify="left">
+                    <h4>PERFIL DE COMPETENCIAS: {{ persona.resultados_buscador[0].perfil.perfil }}</h4>
+                    <p>{{ persona.resultados_buscador[0].perfil.desc_perfil }}</p>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </div>
+          </v-card-text>
+        </v-card>
+
+        <v-divider vertical></v-divider>
+        
       </div>
     </v-container>
   </v-form>
@@ -163,6 +279,15 @@ export default {
     datos: [0, 0, 0, 0],
     valid: true,
     numeroDocumento: "1093216079",
+    introSPE: "La Unidad del Servicio Público de Empleo de Colombia, el cual tiene por función esencial lograr la mejor organización posible del mercado de trabajo, para lo cual ayudará a los trabajadores a encontrar un empleo conveniente, y a los empleadores a contratar trabajadores apropiados a las necesidades de las empresas. Está regulado por el Ministerio del Trabajo y administrado por la Unidad Administrativa Especial del Servicio Público de Empleo. El SPE está conformado por todos los prestadores públicos y privados que desarrollen actividades de gestión y colocación de empleo, que hayan sido autorizados previamente.",
+    intro4B: "4B Performance For Beyond es una herramienta donde podrá identificar su Neurofortaleza, es decir saber donde están las cosas que hace mejor, aquello en lo que naturalmente es bueno y que está asociado con sus fortalezas, así como identificar cuál es su Neurodebilidad, es decir dónde están las tareas que se le dificultan.",
+    titulo01: "Primera sección",
+    titulo01des01: "Encontrará una gráfica de un cerebro que muestra las características asociadas a cada estilo de pensamiento. La tabla de resultados, le permitirá ver cuál es su estilo más usado en su Tiempo libre, Laboral, Autopercepción, Joven y Adulto. Siempre los puntajes más altos están asociados a su modo de pensamiento preferido o usado en esas situaciones.",
+    titulo01des02: "Bienvenido al reporte Performance persona. A continuación podrá ver los 4 estilos de pensamiento y las caracteristicas que definen cada estilo.\n\n"+
+    "Es importante recordar que ningún estilo de pensamiento es mejor o peor que otro, lo más importante es poder entender en dónde fluyo con mayor naturalidad por que implica realizar tareas que se te facilitan, te gustan y las disfrutas",
+    titulo02: "Segunda sección",
+    titulo02des: "Se define cuál es su NEUROFORTALEZA, es decir en qué estilo de pensamiento están las cosas que se le facilitan. Hay una descripción de las características asociadas a este estilo de pensamiento. También se describen las características y tareas asociadas a su NEURODEBILIDAD, es decir el estilo de pensamiento donde están las cosas que se le dificultan; Ademas encontrará el PERFIL DE COMPETENCIAS.",
+        
     nameRules: [
       v => (v && v.length <= 10) || "Name must be less than 10 characters"
     ],
@@ -170,6 +295,8 @@ export default {
     emailRules: [v => /.+@.+\..+/.test(v) || "E-mail must be valid"],
     persona: {},
     mostrarResultados: false,
+    numImgNeurofortaleza: {},
+    numImgNeurodebilidad: {},
     numImgPerfil: {},
 
     datacollection: {},
@@ -207,7 +334,7 @@ export default {
         mode: "single",
         callbacks: {
           label: function(tooltipItems, data) {
-            return "$" + tooltipItems.yLabel;
+            return tooltipItems.xLabel;
           }
         }
       },
@@ -247,6 +374,8 @@ export default {
           this.mostrarResultados = false;
           if (this.persona !== null) {
             this.mostrarResultados = true;
+            this.numImgNeurofortaleza = this.persona.resultados_buscador[0].estilo.estilo;
+            this.numImgNeurodebilidad = this.persona.resultados_buscador[0].estilo.opuesto;
             this.numImgPerfil = this.persona.resultados_buscador[0].id_perfil
               .toString()
               .padStart(2, "0");
@@ -270,7 +399,7 @@ export default {
         labels: ["Analítico EI", "Eficiente AI", "Empático AD", "Creativo ED"],
         datasets: [
           {
-            label: "Data One",
+            label: "Estilos de pensamiento",
             pointBackgroundColor: "white",
             borderWidth: 1,
             pointBorderColor: "#249EBF",

@@ -15,6 +15,11 @@ class Buscador extends Model
         return $this->hasMany(ResultadoBuscador::class, 'id_buscador', 'id_buscador');
     }
 
+    public function estilos()
+    {
+        return $this->belongsToMany(Estilo::class, 'resultado_buscador', 'id_buscador', 'id_estilo');
+    }
+
     public function perfiles()
     {
         return $this->belongsToMany(Perfil::class, 'resultado_buscador', 'id_buscador', 'id_perfil');
