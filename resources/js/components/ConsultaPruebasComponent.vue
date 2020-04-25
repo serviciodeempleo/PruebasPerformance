@@ -33,7 +33,7 @@
         <v-card color="#E7E7E7">
           <v-card-text>
             <div class="headline" style="color:#000">
-              {{introSPE}}
+              <span style="white-space: pre-wrap;">{{introSPE}}</span>
             </div>
           </v-card-text>
         </v-card>
@@ -213,6 +213,30 @@
                     <p>{{ persona.resultados_buscador[0].estilo.estilo_desc }}</p>
                   </v-col>
                 </v-row>
+                <v-row>
+                  <v-col cols="3" align="right" justify="right">
+                    <span class="font-weight-bold">Descriptor General:</span>
+                  </v-col>
+                  <v-col cols="9" align="left" justify="left">
+                    {{ persona.resultados_buscador[0].estilo.estilo_desc_general }}
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="3" align="right" justify="right">
+                    <span class="font-weight-bold">Adjetivos que lo describen:</span>
+                  </v-col>
+                  <v-col cols="9" align="left" justify="left">
+                    {{ persona.resultados_buscador[0].estilo.estilo_desc_adjetivo }}
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="3" align="right" justify="right">
+                    <span class="font-weight-bold">Toma de decisión:</span>
+                  </v-col>
+                  <v-col cols="9" align="left" justify="left">
+                    {{ persona.resultados_buscador[0].estilo.estilo_desc_decision }}
+                  </v-col>
+                </v-row>
               </v-container>
             </div>
           </v-card-text>
@@ -279,7 +303,8 @@ export default {
     datos: [0, 0, 0, 0],
     valid: true,
     numeroDocumento: "1093216079",
-    introSPE: "La Unidad del Servicio Público de Empleo de Colombia, el cual tiene por función esencial lograr la mejor organización posible del mercado de trabajo, para lo cual ayudará a los trabajadores a encontrar un empleo conveniente, y a los empleadores a contratar trabajadores apropiados a las necesidades de las empresas. Está regulado por el Ministerio del Trabajo y administrado por la Unidad Administrativa Especial del Servicio Público de Empleo. El SPE está conformado por todos los prestadores públicos y privados que desarrollen actividades de gestión y colocación de empleo, que hayan sido autorizados previamente.",
+    introSPE: "La Unidad Administrativa Especial del Servicio Público de Empleo con la finalidad de fortalecer los servicios de orientación ocupacional y de preselección de la Red de Prestadores, durante los últimos años suscribió los contratos N .290 de 2015; N. 108 de 2018 y N. 64 de 2019 con el proveedor 4 Beyond SAS quien puso a disposición una plataforma online de su prueba Performance, a través de la cual se identificaban fortalezas y debilidades en los buscadores de empleo.\n\n"+
+    "Teniendo en cuenta que el último contrato finalizó, la Unidad del SPE presenta un aplicativo que le permitirá a la Red de Prestadores consultar los resultados de las pruebas que fueron aplicadas a los buscadores de empleo. Esta búsqueda la podrán realizar con el número del documento de identificación y/o el correo electrónico que la persona usó en la inscripción a la prueba.",
     intro4B: "4B Performance For Beyond es una herramienta donde podrá identificar su Neurofortaleza, es decir saber donde están las cosas que hace mejor, aquello en lo que naturalmente es bueno y que está asociado con sus fortalezas, así como identificar cuál es su Neurodebilidad, es decir dónde están las tareas que se le dificultan.",
     titulo01: "Primera sección",
     titulo01des01: "Encontrará una gráfica de un cerebro que muestra las características asociadas a cada estilo de pensamiento. La tabla de resultados, le permitirá ver cuál es su estilo más usado en su Tiempo libre, Laboral, Autopercepción, Joven y Adulto. Siempre los puntajes más altos están asociados a su modo de pensamiento preferido o usado en esas situaciones.",
