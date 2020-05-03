@@ -5611,8 +5611,7 @@
         "jquery": {
             "version": "3.5.0",
             "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.5.0.tgz",
-            "integrity": "sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==",
-            "dev": true
+            "integrity": "sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ=="
         },
         "js-tokens": {
             "version": "4.0.0",
@@ -10280,6 +10279,11 @@
                 "camelcase": "^5.0.0",
                 "decamelize": "^1.2.0"
             }
+        },
+        "yarn": {
+            "version": "1.22.4",
+            "resolved": "https://registry.npmjs.org/yarn/-/yarn-1.22.4.tgz",
+            "integrity": "sha512-oYM7hi/lIWm9bCoDMEWgffW8aiNZXCWeZ1/tGy0DWrN6vmzjCXIKu2Y21o8DYVBUtiktwKcNoxyGl/2iKLUNGA=="
         }
     }
 }

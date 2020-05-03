@@ -408,7 +408,7 @@ export default {
 
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", "archivo_pdf.pdf"); //or any other extension
+          link.setAttribute("download", `${this.numeroDocumento}.pdf`); //or any other extension
 
           document.body.appendChild(link);
           link.click();

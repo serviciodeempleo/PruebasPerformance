@@ -99,7 +99,7 @@ class BuscadorController extends Controller
             'isPhpEnabled' => true,
             'defaultPaperSize' => 'letter'
         ]);
-        return $pdf->download('archivo_pdf.pdf');
+        return $pdf->download($buscador->documento.'.pdf');
     }
 
 }
