@@ -1,0 +1,37 @@
+@page { 
+	margin-left: 0px; 
+	margin-right: 0px; 
+}
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: small;
+}
+.titulo1{
+	font-size: 1rem;
+}
+.titulo2{
+	font-size: 1.2rem;
+}
+.datos-inicial {
+	display: flex;
+	justify-content: space-between;
+}
+.section-preview {
+	display: flex;
+}
+.bg-blue{
+	background-color: #1F64D2;
+}
+.bg-grey{
+	background-color: #E7E7E7
+}
+.text-height-1 {
+	line-height:1;
+}
+.page-break {
+    page-break-after: always;
+}
+.tablaneuro tr td {
+	padding: 0 !important;
+  	margin: 0 !important;
+}

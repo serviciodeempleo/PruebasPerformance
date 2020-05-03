@@ -20,3 +20,5 @@ Route::get('buscador/filtro/', 'Buscador\BuscadorController@getBuscador')->name(
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('descargar/pdf/{documento}', 'Buscador\BuscadorController@descargarPdf')->name('descargarPdf');

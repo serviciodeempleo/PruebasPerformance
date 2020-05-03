@@ -285,7 +285,13 @@
         </v-card>
 
         <v-divider vertical></v-divider>
+
+        <v-col cols="12" md="4">
+          <v-btn color="#1F64D2" dark class="mr-4" @click="imprimirPdf">Exportar PDF</v-btn>
+        </v-col>
         
+        <v-divider vertical></v-divider>
+
       </div>
     </v-container>
   </v-form>
@@ -383,6 +389,37 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation();
+    },
+    imprimirPdf(){
+      
+      const ruta = `/descargar/pdf/${this.numeroDocumento}`;
+
+      axios.get(ruta, 
+        {
+          responseType: "blob" // important
+        }
+      ).then(
+        response => {
+          console.log("OK");
+          console.log(response);
+          const url = window.URL.createObjectURL(
+            new Blob([response.data], { type: "application/pdf" })
+          );
+
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "archivo_pdf.pdf"); //or any other extension
+
+          document.body.appendChild(link);
+          link.click();
+        },
+        response => {
+          console.log("ERROR");
+          console.log(response.data);
+        }
+      );
+
+      
     },
     buscar() {
       const data = {
