@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('buscador/filtro/', 'Buscador\BuscadorController@getBuscador')->name('filtroBuscador');
 
-
-
-Auth::routes();
+Auth::routes(['verify' => true, 'register' => false]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('descargar/pdf/{documento}', 'Buscador\BuscadorController@descargarPdf')->name('descargarPdf');
+
+Route::get('grafica/{documento}.png','Buscador\BuscadorController@graph')->name('graph');

@@ -377,7 +377,7 @@ export default {
   }),
 
   mounted() {
-    console.log("Component mounted.");
+    // console.log("Component mounted.");
   },
 
   methods: {
@@ -400,8 +400,8 @@ export default {
         }
       ).then(
         response => {
-          console.log("OK");
-          console.log(response);
+          // console.log("OK");
+          // console.log(response);
           const url = window.URL.createObjectURL(
             new Blob([response.data], { type: "application/pdf" })
           );
@@ -414,8 +414,8 @@ export default {
           link.click();
         },
         response => {
-          console.log("ERROR");
-          console.log(response.data);
+          // console.log("ERROR");
+          // console.log(response.data);
         }
       );
 
@@ -431,7 +431,7 @@ export default {
 
       axios.get(ruta, { params: data }).then(
         response => {
-          console.log(response.data);
+          // console.log(response.data);
           this.persona = response.data.data;
           this.mostrarResultados = false;
           if (this.persona !== null) {
@@ -451,7 +451,7 @@ export default {
           }
         },
         response => {
-          console.log(response.data);
+          // console.log(response.data);
         }
       );
     },

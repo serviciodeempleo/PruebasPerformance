@@ -114,12 +114,12 @@
             <p class="titulo2">{{$titulo01}}</p>
         </section>
 
-        <section class="mt-3 section-preview">    
+        <section class="section-preview">    
             <p>{!! nl2br($titulo01des02) !!}</p>
         </section>
 
         <!-- Aquí imagen cerebro -->
-        <section class="mt-1 section-preview">    
+        <section class="section-preview compacto">    
            <div class="row align-items-center">
                 <table class="table-borderless mx-auto">
                     <tr>
@@ -186,12 +186,20 @@
         </section>
 
         <!-- Aquí gráfico de barras -->
-        <section class="section-preview">    
-        
+        <section class="section-preview compacto">    
+           <div class="row align-items-center">
+                <table class="table-borderless mx-auto">
+                    <tr>
+                        <td>
+                        <img class="center-block" alt="Gráfico de competencias" src="{{$imgBarras}}" width="500" height="230">
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </section>
 
         <!-- Aquí tabla competencias -->
-        <section class="mt-1 section-preview">
+        <section class="section-preview">
             <div class="row align-items-center">
                 <table class="table-sm table-borderless text-center w-auto mx-auto">
                     <thead class="p-3 alert">

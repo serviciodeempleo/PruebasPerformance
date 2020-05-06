@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Buscador;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File; 
 use Illuminate\Http\Request;
 use App\Models\Buscador;
+use JpGraph\JpGraph;
 use Log;
 
 class BuscadorController extends Controller
@@ -12,7 +14,7 @@ class BuscadorController extends Controller
     
     public function getBuscador(Request $request)
     {
-        Log::info($request);
+        // Log::info($request);
 
         $documento = $request['documento'];
         $email = $request['email'];
@@ -77,6 +79,66 @@ class BuscadorController extends Controller
         $titulo02 = 'Segunda sección';
 
         $titulo02des = 'Se define cuál es su NEUROFORTALEZA, es decir en qué estilo de pensamiento están las cosas que se le facilitan. Hay una descripción de las características asociadas a este estilo de pensamiento. También se describen las características y tareas asociadas a su NEURODEBILIDAD, es decir el estilo de pensamiento donde están las cosas que se le dificultan; Ademas encontrará el PERFIL DE COMPETENCIAS.';
+
+        $bar = new JpGraph();
+        $bar->module('bar');
+
+        $plotline = new JpGraph();
+        $plotline->module('plotline');
+
+        $ei = $buscador->resultadosBuscador[0]->ei;
+        $ai = $buscador->resultadosBuscador[0]->ai;
+        $ad = $buscador->resultadosBuscador[0]->ad;
+        $ed = $buscador->resultadosBuscador[0]->ed;
+
+        $datay=array($ei,$ai,$ad,$ed);
+
+        $barcolors = array("dodgerblue3","limegreen","brown3","gold");
+
+        // Size of graph
+        $width = 500;
+        $height = 230;
+        $top = 30;
+        $bottom = 20;
+        $left = 90;
+        $right = 30;
+
+        // Set the basic parameters of the graph
+        $graph = new \Graph($width,$height,'auto');
+        $graph->img->SetImgFormat('png');
+        $graph->SetScale('textlin',0,120);
+        $graph->yscale->ticks->Set(20,1);
+        $graph->Set90AndMargin($left,$right,$top,$bottom);
+
+        // Nice shadow
+        $graph->SetShadow();
+
+        // Setup labels
+        $lbl = array("Analítico EI","Eficiente AI","Empático AD","Creativo ED");
+        $graph->xaxis->SetTickLabels($lbl);
+
+        // Label align for X-axis
+        $graph->xaxis->SetLabelAlign('right','center','right');
+
+        // Label align for Y-axis
+        $graph->yaxis->SetLabelAlign('center','bottom');
+
+        // Plot line
+        $sline = new \PlotLine(HORIZONTAL,80,'dodgerblue1'); 
+        $graph->Add($sline);
+
+        // Create a bar pot
+        $bplot = new \BarPlot($datay); 
+        $graph->Add($bplot);
+        $bplot->value->Show();
+
+        $bplot->SetFillColor($barcolors);
+        $bplot->SetWidth(0.6);
+        
+        File::delete(public_path() . '/img/usuarios/barras_'.$documento.'.png');
+        $graph->Stroke(public_path() . '/img/usuarios/barras_'.$documento.'.png');
+        
+        $imgBarras = public_path() . '/img/usuarios/barras_'.$documento.'.png';
         
         $pdf = \PDF::loadView('pdf', [
             'buscador' => $buscador,
@@ -93,13 +155,79 @@ class BuscadorController extends Controller
             'titulo01des02' => $titulo01des02,
             'titulo02' => $titulo02,
             'titulo02des' => $titulo02des,
-            'imagenCerebro' => $imagenCerebro
+            'imagenCerebro' => $imagenCerebro,
+            'imgBarras' => $imgBarras
         ]);
         $pdf->setOptions([
             'isPhpEnabled' => true,
             'defaultPaperSize' => 'letter'
         ]);
         return $pdf->download($buscador->documento.'.pdf');
+    }
+
+    public function graph($documento){
+        $buscador = Buscador::where('documento',$documento)
+        ->with('tipoDocumento','prestadorUsuario','resultadosBuscador','resultadosBuscador.perfil','resultadosBuscador.estilo')
+        ->first()
+        ;
+
+        $bar = new JpGraph();
+        $bar->module('bar');
+
+        $plotline = new JpGraph();
+        $plotline->module('plotline');
+
+        $ei = $buscador->resultadosBuscador[0]->ei;
+        $ai = $buscador->resultadosBuscador[0]->ai;
+        $ad = $buscador->resultadosBuscador[0]->ad;
+        $ed = $buscador->resultadosBuscador[0]->ed;
+
+        $datay=array($ei,$ai,$ad,$ed);
+
+        $barcolors = array("dodgerblue3","limegreen","brown3","gold");
+
+        // Size of graph
+        $width = 500;
+        $height = 230;
+        $top = 30;
+        $bottom = 20;
+        $left = 90;
+        $right = 30;
+
+        // Set the basic parameters of the graph
+        $graph = new \Graph($width,$height,'auto');
+        $graph->img->SetImgFormat('png');
+        $graph->SetScale('textlin',0,120);
+        $graph->yscale->ticks->Set(20,1);
+        $graph->Set90AndMargin($left,$right,$top,$bottom);
+
+        // Nice shadow
+        $graph->SetShadow();
+
+        // Setup labels
+        $lbl = array("Analítico EI","Eficiente AI","Empático AD","Creativo ED");
+        $graph->xaxis->SetTickLabels($lbl);
+
+        // Label align for X-axis
+        $graph->xaxis->SetLabelAlign('right','center','right');
+
+        // Label align for Y-axis
+        $graph->yaxis->SetLabelAlign('center','bottom');
+
+        // Plot line
+        $sline = new \PlotLine(HORIZONTAL,80,'dodgerblue1'); 
+        $graph->Add($sline);
+
+        // Create a bar pot
+        $bplot = new \BarPlot($datay); 
+        $graph->Add($bplot);
+        $bplot->value->Show();
+
+        $bplot->SetFillColor($barcolors);
+        $bplot->SetWidth(0.6);
+        
+        $graph->Stroke();
+
     }
 
 }
