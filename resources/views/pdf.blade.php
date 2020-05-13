@@ -23,7 +23,7 @@
         <section class="mt-3 datos-inicial">
             <div class="row">
                 <div class="col">
-                    <img class="float-left" alt="Servicio Público de Empleo" src="{{$imagenLogoSPE}}" width="180" height="75">
+                    <img class="float-left" alt="Servicio Público de Empleo" src="{{$imagenLogoSPE}}" width="182" height="75">
                 </div>
                 <div class="col">
                     <img class="float-right" alt="Ministerio del Trabajo" src="{{$imagenMinTrabajo}}" width="306" height="59">
@@ -85,9 +85,11 @@
         <section class="mt-3 section-preview">
             <div>
                 <p class="titulo1">{{$titulo01}}</p>
-                <p>{{$titulo01des01}}</p>
+                <p><small>{{$titulo01des01}}</small></p>
                 <p class="titulo1">{{$titulo02}}</p>
-                <p>{{$titulo02des}}</p>
+                <p><small>{{$titulo02des01}}</small></p>
+                <p class="titulo1">{{$titulo03}}</p>
+                <p><small>{{$titulo03des01}}</small></p>
             </div>
         </section>
 
@@ -98,7 +100,7 @@
         <section class="mt-3 datos-inicial">
             <div class="row">
                 <div class="col">
-                    <img class="float-left" alt="Servicio Público de Empleo" src="{{$imagenLogoSPE}}" width="180" height="75">
+                    <img class="float-left" alt="Servicio Público de Empleo" src="{{$imagenLogoSPE}}" width="182" height="75">
                 </div>
                 <div class="col">
                     <img class="float-right" alt="Ministerio del Trabajo" src="{{$imagenMinTrabajo}}" width="306" height="59">
@@ -114,12 +116,12 @@
             <p class="titulo2">{{$titulo01}}</p>
         </section>
 
-        <section class="section-preview">    
-            <p>{!! nl2br($titulo01des02) !!}</p>
+        <section class="mt-3 section-preview">    
+            <p>{!! nl2br($titulo01des01) !!}</p>
         </section>
 
         <!-- Aquí imagen cerebro -->
-        <section class="section-preview compacto">    
+        <section class="mt-3 section-preview">    
            <div class="row align-items-center">
                 <table class="table-borderless mx-auto">
                     <tr>
@@ -185,21 +187,12 @@
             </div>
         </section>
 
-        <!-- Aquí gráfico de barras -->
-        <section class="section-preview compacto">    
-           <div class="row align-items-center">
-                <table class="table-borderless mx-auto">
-                    <tr>
-                        <td>
-                        <img class="center-block" alt="Gráfico de competencias" src="{{$imgBarras}}" width="500" height="230">
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <section class="mt-1 section-preview">    
+            <p>{!! nl2br($titulo01des02) !!}</p>
         </section>
 
         <!-- Aquí tabla competencias -->
-        <section class="section-preview">
+        <section class="mt-3 section-preview">
             <div class="row align-items-center">
                 <table class="table-sm table-borderless text-center w-auto mx-auto">
                     <thead class="p-3 alert">
@@ -212,39 +205,39 @@
                         </tr>
                     </thead>
                     <tr class="table-primary">
-                        <td><small>Joven</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->joven_ai}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->joven_ei}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->joven_ad}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->joven_ed}}</small></td>
+                        <td>Joven</td>
+                        <td>{{$buscador->resultadosBuscador[0]->joven_ai}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->joven_ei}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->joven_ad}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->joven_ed}}</td>
                     </tr>
                     <tr class="table-primary">
-                        <td><small>Adulto</td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->ei}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->ai}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->ad}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->ed}}</small></td>
+                        <td>Adulto</td>
+                        <td>{{$buscador->resultadosBuscador[0]->ei}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->ai}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->ad}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->ed}}</td>
                     </tr>
                     <tr class="bg-primary">
-                        <td><small>Tiempo Libre</td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->libre_ei}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->libre_ai}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->libre_ad}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->libre_ed}}</small></td>
+                        <td>Tiempo Libre</td>
+                        <td>{{$buscador->resultadosBuscador[0]->libre_ei}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->libre_ai}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->libre_ad}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->libre_ed}}</td>
                     </tr>
                     <tr class="bg-primary">
-                        <td><small>Laboral</td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->laboral_ei}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->laboral_ai}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->laboral_ad}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->laboral_ed}}</small></td>
+                        <td>Laboral</td>
+                        <td>{{$buscador->resultadosBuscador[0]->laboral_ei}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->laboral_ai}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->laboral_ad}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->laboral_ed}}</td>
                     </tr>
                     <tr class="bg-primary">
-                        <td><small>Autopercepción</td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->auto_ei}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->auto_ai}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->auto_ad}}</small></td>
-                        <td><small>{{$buscador->resultadosBuscador[0]->auto_ed}}</small></td>
+                        <td>Autopercepción</td>
+                        <td>{{$buscador->resultadosBuscador[0]->auto_ei}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->auto_ai}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->auto_ad}}</td>
+                        <td>{{$buscador->resultadosBuscador[0]->auto_ed}}</td>
                     </tr>
                 </table>
             </div>
@@ -257,7 +250,7 @@
         <section class="mt-3 datos-inicial">
             <div class="row">
                 <div class="col">
-                    <img class="float-left" alt="Servicio Público de Empleo" src="{{$imagenLogoSPE}}" width="180" height="75">
+                    <img class="float-left" alt="Servicio Público de Empleo" src="{{$imagenLogoSPE}}" width="182" height="75">
                 </div>
                 <div class="col">
                     <img class="float-right" alt="Ministerio del Trabajo" src="{{$imagenMinTrabajo}}" width="306" height="59">
@@ -273,8 +266,12 @@
             <p class="titulo2">{{$titulo02}}</p>
         </section>
 
+        <section class="mt-3 section-preview">    
+            <p>{!! nl2br($titulo02des01) !!}</p>
+        </section>
+
         <!-- Aquí imagen neurofortaleza y texto neurofortaleza -->
-        <section class="mt-2 section-preview">    
+        <section class="mt-3 section-preview">    
             <div class="border text-center shadow-sm rounded-lg p-3">
                 <table class="table-borderless mx-auto tablaneuro">
                     <tr>
@@ -319,7 +316,7 @@
         </section>
 
         <!-- Aquí imagen neurodebilidad y texto neurodebilidad -->
-        <section class="mt-2 section-preview">    
+        <section class="mt-3 section-preview">    
             <div class="border text-center shadow-sm rounded-lg p-3">
                 <table class="table-borderless mx-auto tablaneuro">
                     <tr>
@@ -339,8 +336,35 @@
             </div>            
         </section>
 
+        <!-- Salto de página -->
+        <div class="page-break"></div>
+
+        <!-- Imágenes encabezado -->
+        <section class="mt-3 datos-inicial">
+            <div class="row">
+                <div class="col">
+                    <img class="float-left" alt="Servicio Público de Empleo" src="{{$imagenLogoSPE}}" width="182" height="75">
+                </div>
+                <div class="col">
+                    <img class="float-right" alt="Ministerio del Trabajo" src="{{$imagenMinTrabajo}}" width="306" height="59">
+                </div>	
+            </div>
+        </section>
+
+        <section class="mt-4 section-preview">
+            <div class="row mt-2"></div>
+        </section>
+
+        <section class="mt-1 section-preview">    
+            <p class="titulo2">{{$titulo03}}</p>
+        </section>
+
+        <section class="mt-3 section-preview">    
+            <p>{!! nl2br($titulo03des01) !!}</p>
+        </section>
+
         <!-- Aquí imagen competencia y texto competencia -->
-        <section class="mt-2 section-preview">    
+        <section class="mt-3 section-preview">    
             <div class="border text-center shadow-sm rounded-lg p-3">
                 <table class="table-borderless mx-auto tablaneuro">
                     <tr>
@@ -361,6 +385,19 @@
                     </tr>                    
                 </table>
             </div>            
+        </section>
+
+        <!-- Aquí gráfico de barras -->
+        <section class="mt-3 section-preview">    
+           <div class="row align-items-center">
+                <table class="table-borderless mx-auto">
+                    <tr>
+                        <td>
+                        <img class="center-block" alt="Gráfico de competencias" src="{{$imgBarras}}" width="500" height="230">
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </section>
 
     </div>

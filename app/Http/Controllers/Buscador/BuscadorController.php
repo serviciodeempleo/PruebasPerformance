@@ -66,79 +66,88 @@ class BuscadorController extends Controller
         
         Teniendo en cuenta que el último contrato finalizó, la Unidad del SPE presenta un aplicativo que le permitirá a la Red de Prestadores consultar los resultados de las pruebas que fueron aplicadas a los buscadores de empleo. Esta búsqueda la podrán realizar con el número del documento de identificación y/o el correo electrónico que la persona usó en la inscripción a la prueba.';
 
-        $intro4B = '4B Performance For Beyond es una herramienta donde podrá identificar su Neurofortaleza, es decir saber donde están las cosas que hace mejor, aquello en lo que naturalmente es bueno y que está asociado con sus fortalezas, así como identificar cuál es su Neurodebilidad, es decir dónde están las tareas que se le dificultan.';
+        $intro4B = 'Performance es una herramienta donde podrá identificar su Neurofortaleza, es decir saber dónde están las cosas que hace mejor, aquello en lo que naturalmente es bueno y que está asociado con sus fortalezas, así como identificar cuál es su Neurodebilidad, es decir dónde están las tareas que se le dificultan.';
 
         $titulo01 = 'Primera sección';
 
-        $titulo01des01 = 'Encontrará una gráfica de un cerebro que muestra las características asociadas a cada estilo de pensamiento. La tabla de resultados, le permitirá ver cuál es su estilo más usado en su Tiempo libre, Laboral, Autopercepción, Joven y Adulto. Siempre los puntajes más altos están asociados a su modo de pensamiento preferido o usado en esas situaciones.';
+        $titulo01des01 = 'A continuación, podrá ver los 4 estilos de pensamiento y las características que definen cada estilo. Es importante recordar que un estilo de pensamiento no es mejor que otro, lo más importante es poder entender en dónde fluyo con mayor naturalidad, identificando las tareas que se te facilitan, te gustan y las disfrutas.';
 
-        $titulo01des02 = 'Bienvenido al reporte Performance persona. A continuación podrá ver los 4 estilos de pensamiento y las caracteristicas que definen cada estilo.
-        
-        Es importante recordar que ningún estilo de pensamiento es mejor o peor que otro, lo más importante es poder entender en dónde fluyo con mayor naturalidad por que implica realizar tareas que se te facilitan, te gustan y las disfrutas';
+        $titulo01des02 = 'La tabla de resultados le permitirá ver cuál es su estilo más usado según las siguientes categorías: tiempo libre, laboral, autopercepción, joven y adulto. Siempre los puntajes más altos están asociados a su modo de pensamiento preferido o usado en esas situaciones.';
 
         $titulo02 = 'Segunda sección';
 
-        $titulo02des = 'Se define cuál es su NEUROFORTALEZA, es decir en qué estilo de pensamiento están las cosas que se le facilitan. Hay una descripción de las características asociadas a este estilo de pensamiento. También se describen las características y tareas asociadas a su NEURODEBILIDAD, es decir el estilo de pensamiento donde están las cosas que se le dificultan; Ademas encontrará el PERFIL DE COMPETENCIAS.';
+        $titulo02des01 = 'Se define cuál es su NEUROFORTALEZA, es decir en qué estilo de pensamiento están las cosas que se le facilitan. Hay una descripción de las características asociadas a este estilo de pensamiento. También se describen las características y tareas asociadas a su NEURODEBILIDAD, es decir el estilo de pensamiento donde están las cosas que se le dificultan.';
 
-        $bar = new JpGraph();
-        $bar->module('bar');
+        $titulo03 = 'Tercera sección';
 
-        $plotline = new JpGraph();
-        $plotline->module('plotline');
-
-        $ei = $buscador->resultadosBuscador[0]->ei;
-        $ai = $buscador->resultadosBuscador[0]->ai;
-        $ad = $buscador->resultadosBuscador[0]->ad;
-        $ed = $buscador->resultadosBuscador[0]->ed;
-
-        $datay=array($ei,$ai,$ad,$ed);
-
-        $barcolors = array("dodgerblue3","limegreen","brown3","gold");
-
-        // Size of graph
-        $width = 500;
-        $height = 230;
-        $top = 30;
-        $bottom = 20;
-        $left = 90;
-        $right = 30;
-
-        // Set the basic parameters of the graph
-        $graph = new \Graph($width,$height,'auto');
-        $graph->img->SetImgFormat('png');
-        $graph->SetScale('textlin',0,120);
-        $graph->yscale->ticks->Set(20,1);
-        $graph->Set90AndMargin($left,$right,$top,$bottom);
-
-        // Nice shadow
-        $graph->SetShadow();
-
-        // Setup labels
-        $lbl = array("Analítico EI","Eficiente AI","Empático AD","Creativo ED");
-        $graph->xaxis->SetTickLabels($lbl);
-
-        // Label align for X-axis
-        $graph->xaxis->SetLabelAlign('right','center','right');
-
-        // Label align for Y-axis
-        $graph->yaxis->SetLabelAlign('center','bottom');
-
-        // Plot line
-        $sline = new \PlotLine(HORIZONTAL,80,'dodgerblue1'); 
-        $graph->Add($sline);
-
-        // Create a bar pot
-        $bplot = new \BarPlot($datay); 
-        $graph->Add($bplot);
-        $bplot->value->Show();
-
-        $bplot->SetFillColor($barcolors);
-        $bplot->SetWidth(0.6);
-        
-        File::delete(public_path() . '/img/usuarios/barras_'.$documento.'.png');
-        $graph->Stroke(public_path() . '/img/usuarios/barras_'.$documento.'.png');
+        $titulo03des01 = 'Aquí se presentará el perfil de competencias que se refiere a las tareas y/o acciones que se le facilita y las características de la persona de acuerdo con las competencias desarrolladas; representa el comportamiento o forma de actuar hoy. Se presenta también un diagrama de barras con las ponderaciones por cada uno de los estilos de pensamiento según su perfil de competencia.';
         
         $imgBarras = public_path() . '/img/usuarios/barras_'.$documento.'.png';
+        
+        if(File::exists($imgBarras))
+        {
+            //No lo crea de nuevo
+        }
+        else
+        {
+            $bar = new JpGraph();
+            $bar->module('bar');
+
+            $plotline = new JpGraph();
+            $plotline->module('plotline');
+
+            $ei = $buscador->resultadosBuscador[0]->ei;
+            $ai = $buscador->resultadosBuscador[0]->ai;
+            $ad = $buscador->resultadosBuscador[0]->ad;
+            $ed = $buscador->resultadosBuscador[0]->ed;
+
+            $datay=array($ei,$ai,$ad,$ed);
+
+            $barcolors = array("dodgerblue3","limegreen","brown3","gold");
+
+            // Size of graph
+            $width = 500;
+            $height = 230;
+            $top = 30;
+            $bottom = 20;
+            $left = 90;
+            $right = 30;
+
+            // Set the basic parameters of the graph
+            $graph = new \Graph($width,$height,'auto');
+            $graph->img->SetImgFormat('png');
+            $graph->SetScale('textlin',0,120);
+            $graph->yscale->ticks->Set(20,1);
+            $graph->Set90AndMargin($left,$right,$top,$bottom);
+
+            // Nice shadow
+            $graph->SetShadow();
+
+            // Setup labels
+            $lbl = array("Analítico EI","Eficiente AI","Empático AD","Creativo ED");
+            $graph->xaxis->SetTickLabels($lbl);
+
+            // Label align for X-axis
+            $graph->xaxis->SetLabelAlign('right','center','right');
+
+            // Label align for Y-axis
+            $graph->yaxis->SetLabelAlign('center','bottom');
+
+            // Plot line
+            $sline = new \PlotLine(HORIZONTAL,80,'dodgerblue1'); 
+            $graph->Add($sline);
+
+            // Create a bar pot
+            $bplot = new \BarPlot($datay); 
+            $graph->Add($bplot);
+            $bplot->value->Show();
+
+            $bplot->SetFillColor($barcolors);
+            $bplot->SetWidth(0.6);
+            
+            //File::delete($imgBarras);
+            $graph->Stroke($imgBarras);
+        }       
         
         $pdf = \PDF::loadView('pdf', [
             'buscador' => $buscador,
@@ -154,7 +163,9 @@ class BuscadorController extends Controller
             'titulo01des01' => $titulo01des01,
             'titulo01des02' => $titulo01des02,
             'titulo02' => $titulo02,
-            'titulo02des' => $titulo02des,
+            'titulo02des01' => $titulo02des01,
+            'titulo03' => $titulo03,
+            'titulo03des01' => $titulo03des01,
             'imagenCerebro' => $imagenCerebro,
             'imgBarras' => $imgBarras
         ]);

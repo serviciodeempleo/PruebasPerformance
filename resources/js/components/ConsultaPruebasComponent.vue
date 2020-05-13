@@ -40,7 +40,7 @@
 
         <v-divider vertical></v-divider>
 
-        <v-card color="#1F64D2" dark>
+        <v-card color="#4167AB" dark>
           <v-card-title class="headline text-uppercase">{{persona.nombre}} {{persona.apellido}}</v-card-title>
 
           <v-card-subtitle>{{persona.tipo_documento.tipo_documento}} {{persona.documento}}</v-card-subtitle>
@@ -71,32 +71,12 @@
 
         <v-divider vertical></v-divider>
 
-        <h4
-          v-if="persona.resultados_buscador"
-        >{{titulo01}}</h4>
-
-        <div style="display:flex; justify-content:space-between;">
-          {{titulo01des01}}
-        </div>
-
-        <v-divider vertical></v-divider>
-
-        <h4
-          v-if="persona.resultados_buscador"
-        >{{titulo02}}</h4>
-
-        <div style="display:flex; justify-content:space-between;">
-          {{titulo02des}}
-        </div>
-
-        <v-divider vertical></v-divider>
-
         <h3
           v-if="persona.resultados_buscador"
         >{{titulo01}}</h3>
 
         <div style="display:flex; justify-content:space-between;">
-          <span style="white-space: pre-wrap;">{{titulo01des02}}</span>
+          <span style="white-space: pre-wrap;">{{titulo01des01}}</span>
         </div>
 
         <!-- Aquí imagen cerebro -->
@@ -108,20 +88,9 @@
           </v-row>
         </v-container>
 
-        <v-divider vertical></v-divider>
-
-        <!-- Aquí gráfico de barras -->
-        <v-container fill-height fluid>
-          <v-row align="center" justify="center">
-            <v-col cols="2"></v-col>
-            <v-col cols="8">
-              <horizontal-bar-chart :chart-data="datacollection" :options="options" :height="300"></horizontal-bar-chart>
-            </v-col>
-            <v-col cols="2"></v-col>
-          </v-row>
-        </v-container>
-
-        <v-divider vertical></v-divider>
+         <div style="display:flex; justify-content:space-between;">
+          <span style="white-space: pre-wrap;">{{titulo01des02}}</span>
+        </div>
 
         <!-- Aquí tabla competencias -->
         <v-container fill-height fluid>
@@ -158,7 +127,7 @@
                     </tr>
                   </tbody>
                   <tbody>
-                    <tr bgcolor="#007BFF">
+                    <tr bgcolor="#0586DC">
                       <td>Tiempo Libre</td>
                       <td>{{ persona.resultados_buscador[0].libre_ei }}</td>
                       <td>{{ persona.resultados_buscador[0].libre_ai }}</td>
@@ -167,7 +136,7 @@
                     </tr>
                   </tbody>
                   <tbody>
-                    <tr bgcolor="#007BFF">
+                    <tr bgcolor="#0586DC">
                       <td>Laboral</td>
                       <td>{{ persona.resultados_buscador[0].laboral_ei }}</td>
                       <td>{{ persona.resultados_buscador[0].laboral_ai }}</td>
@@ -176,7 +145,7 @@
                     </tr>
                   </tbody>
                   <tbody>
-                    <tr bgcolor="#007BFF">
+                    <tr bgcolor="#0586DC">
                       <td>Autopercepción</td>
                       <td>{{ persona.resultados_buscador[0].auto_ei }}</td>
                       <td>{{ persona.resultados_buscador[0].auto_ai }}</td>
@@ -196,6 +165,10 @@
         <h3
           v-if="persona.resultados_buscador"
         >{{titulo02}}</h3>
+
+        <div style="display:flex; justify-content:space-between;">
+          <span style="white-space: pre-wrap;">{{titulo02des01}}</span>
+        </div>
 
         <v-divider vertical></v-divider>
 
@@ -265,6 +238,16 @@
 
         <v-divider vertical></v-divider>
 
+        <h3
+          v-if="persona.resultados_buscador"
+        >{{titulo03}}</h3>
+
+        <div style="display:flex; justify-content:space-between;">
+          <span style="white-space: pre-wrap;">{{titulo03des01}}</span>
+        </div>
+
+        <v-divider vertical></v-divider>
+
         <!-- Aquí imagen competencia y texto competencia -->
         <v-card color="rgb(255, 255, 255, 0.2)">
           <v-card-text>
@@ -283,6 +266,19 @@
             </div>
           </v-card-text>
         </v-card>
+
+        <v-divider vertical></v-divider>
+
+        <!-- Aquí gráfico de barras -->
+        <v-container fill-height fluid>
+          <v-row align="center" justify="center">
+            <v-col cols="2"></v-col>
+            <v-col cols="8">
+              <horizontal-bar-chart :chart-data="datacollection" :options="options" :height="300"></horizontal-bar-chart>
+            </v-col>
+            <v-col cols="2"></v-col>
+          </v-row>
+        </v-container>
 
         <v-divider vertical></v-divider>
 
@@ -311,13 +307,14 @@ export default {
     numeroDocumento: "1093216079",
     introSPE: "La Unidad Administrativa Especial del Servicio Público de Empleo con la finalidad de fortalecer los servicios de orientación ocupacional y de preselección de la Red de Prestadores, durante los últimos años suscribió los contratos N .290 de 2015; N. 108 de 2018 y N. 64 de 2019 con el proveedor 4 Beyond SAS quien puso a disposición una plataforma online de su prueba Performance, a través de la cual se identificaban fortalezas y debilidades en los buscadores de empleo.\n\n"+
     "Teniendo en cuenta que el último contrato finalizó, la Unidad del SPE presenta un aplicativo que le permitirá a la Red de Prestadores consultar los resultados de las pruebas que fueron aplicadas a los buscadores de empleo. Esta búsqueda la podrán realizar con el número del documento de identificación y/o el correo electrónico que la persona usó en la inscripción a la prueba.",
-    intro4B: "4B Performance For Beyond es una herramienta donde podrá identificar su Neurofortaleza, es decir saber donde están las cosas que hace mejor, aquello en lo que naturalmente es bueno y que está asociado con sus fortalezas, así como identificar cuál es su Neurodebilidad, es decir dónde están las tareas que se le dificultan.",
+    intro4B: "Performance es una herramienta donde podrá identificar su Neurofortaleza, es decir saber dónde están las cosas que hace mejor, aquello en lo que naturalmente es bueno y que está asociado con sus fortalezas, así como identificar cuál es su Neurodebilidad, es decir dónde están las tareas que se le dificultan.",
     titulo01: "Primera sección",
-    titulo01des01: "Encontrará una gráfica de un cerebro que muestra las características asociadas a cada estilo de pensamiento. La tabla de resultados, le permitirá ver cuál es su estilo más usado en su Tiempo libre, Laboral, Autopercepción, Joven y Adulto. Siempre los puntajes más altos están asociados a su modo de pensamiento preferido o usado en esas situaciones.",
-    titulo01des02: "Bienvenido al reporte Performance persona. A continuación podrá ver los 4 estilos de pensamiento y las caracteristicas que definen cada estilo.\n\n"+
-    "Es importante recordar que ningún estilo de pensamiento es mejor o peor que otro, lo más importante es poder entender en dónde fluyo con mayor naturalidad por que implica realizar tareas que se te facilitan, te gustan y las disfrutas",
+    titulo01des01: "A continuación, podrá ver los 4 estilos de pensamiento y las características que definen cada estilo. Es importante recordar que un estilo de pensamiento no es mejor que otro, lo más importante es poder entender en dónde fluyo con mayor naturalidad, identificando las tareas que se te facilitan, te gustan y las disfrutas.",
+    titulo01des02: "La tabla de resultados le permitirá ver cuál es su estilo más usado según las siguientes categorías: tiempo libre, laboral, autopercepción, joven y adulto. Siempre los puntajes más altos están asociados a su modo de pensamiento preferido o usado en esas situaciones.",
     titulo02: "Segunda sección",
-    titulo02des: "Se define cuál es su NEUROFORTALEZA, es decir en qué estilo de pensamiento están las cosas que se le facilitan. Hay una descripción de las características asociadas a este estilo de pensamiento. También se describen las características y tareas asociadas a su NEURODEBILIDAD, es decir el estilo de pensamiento donde están las cosas que se le dificultan; Ademas encontrará el PERFIL DE COMPETENCIAS.",
+    titulo02des01: "Se define cuál es su NEUROFORTALEZA, es decir en qué estilo de pensamiento están las cosas que se le facilitan. Hay una descripción de las características asociadas a este estilo de pensamiento. También se describen las características y tareas asociadas a su NEURODEBILIDAD, es decir el estilo de pensamiento donde están las cosas que se le dificultan.",
+    titulo03: "Tercera sección",
+    titulo03des01: "Aquí se presentará el perfil de competencias que se refiere a las tareas y/o acciones que se le facilita y las características de la persona de acuerdo con las competencias desarrolladas; representa el comportamiento o forma de actuar hoy. Se presenta también un diagrama de barras con las ponderaciones por cada uno de los estilos de pensamiento según su perfil de competencia.",
         
     nameRules: [
       v => (v && v.length <= 10) || "Name must be less than 10 characters"

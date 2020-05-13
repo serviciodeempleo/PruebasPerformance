@@ -20,7 +20,7 @@ body {
 	display: flex;
 }
 .bg-blue{
-	background-color: #1F64D2;
+	background-color: #4167AB;
 }
 .bg-grey{
 	background-color: #E7E7E7
@@ -34,7 +34,4 @@ body {
 .tablaneuro tr td {
 	padding: 0 !important;
   	margin: 0 !important;
-}
-.compacto{
-	margin-top: -20px;
 }
