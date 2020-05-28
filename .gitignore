@@ -2,7 +2,7 @@
 /public/hot
 /public/storage
 /public/img/usuarios/*.png
-/public/archivos_pdf/*
+/public/archivos_pdf/*.pdf
 /storage/*.key
 /vendor
 .env
