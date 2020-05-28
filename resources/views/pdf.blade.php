@@ -34,6 +34,10 @@
         <section class="mt-5 section-preview">
             <div class="row mt-3"></div>
         </section>
+
+        <section class="mt-5 section-preview">
+            <div class="row mt-3"></div>
+        </section>
         
         <section class="mt-3 section-preview">        
             <div class="border bg-grey shadow-sm rounded-lg p-4">
@@ -79,17 +83,6 @@
         <section class="mt-3 section-preview">
             <div class="border bg-grey shadow-sm rounded-lg p-3">
                 <div>{{$intro4B}}</div>
-            </div>
-        </section>
-
-        <section class="mt-3 section-preview">
-            <div>
-                <p class="titulo1">{{$titulo01}}</p>
-                <p><small>{{$titulo01des01}}</small></p>
-                <p class="titulo1">{{$titulo02}}</p>
-                <p><small>{{$titulo02des01}}</small></p>
-                <p class="titulo1">{{$titulo03}}</p>
-                <p><small>{{$titulo03des01}}</small></p>
             </div>
         </section>
 
